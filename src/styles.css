@@ -1,1 +1,8 @@
-/* You can add global styles to this file, and also import other style files */
+body{
+font-family: 'Fredoka', sans-serif !important;
+
+}
+:root {
+  /* --primary-color: #d41646; */
+  --primary-color: #db4444
+}

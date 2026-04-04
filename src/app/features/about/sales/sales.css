@@ -1,0 +1,44 @@
+.stat-card {
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  transition: transform 0.3s, box-shadow 0.3s;
+  background: #fff;
+}
+
+.stat-card .icon {
+  width: 60px;
+  height: 60px;
+  margin: 0 auto;
+  border-radius: 50%;
+  background: #f0f0f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #000;
+}
+
+.stat-card h3 {
+  font-size: 1.5rem;
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+
+.stat-card p {
+  color: #555;
+  font-size: 0.9rem;
+}
+
+/* Hover effect */
+.stat-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+/* Highlight card */
+.stat-card:hover {
+  background: #dc3545; /* Bootstrap danger red */
+  color: #fff;
+  border: none;
+}
+
+ 

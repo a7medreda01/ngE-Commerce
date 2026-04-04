@@ -1,0 +1,52 @@
+<!-- Sidebar Navigation + Dynamic Content -->
+<h6>Manage My Account</h6>
+<div class="links flex-md-column">
+
+  <a [routerLink]="['/account/edit']"
+     routerLinkActive="active"
+     [routerLinkActiveOptions]="{ exact: true }"
+     class="link-mav">
+    My Profile
+  </a>
+
+  <a [routerLink]="['/account/address']"
+     routerLinkActive="active"
+     [routerLinkActiveOptions]="{ exact: true }"
+     class="link-mav">
+    Address Book
+  </a>
+
+  <a [routerLink]="['/account/payment']"
+     routerLinkActive="active"
+     [routerLinkActiveOptions]="{ exact: true }"
+     class="link-mav">
+    My Payment Options
+  </a>
+
+</div>
+
+<h6>My Orders</h6>
+<div class="links flex-md-column">
+
+  <a [routerLink]="['/account/my-orders']"
+     routerLinkActive="active"
+     [routerLinkActiveOptions]="{ exact: true }"
+     class="link-mav">
+    My Orders
+  </a>
+
+  <a [routerLink]="['/account/my-cancelation']"
+     routerLinkActive="active"
+     [routerLinkActiveOptions]="{ exact: true }"
+     class="link-mav">
+    My Cancelation
+  </a>
+
+</div>
+
+<!-- <a [routerLink]="['/account/wish-items']"
+   routerLinkActive="active"
+   [routerLinkActiveOptions]="{ exact: true }"
+   class="link-mav text-black">
+ <h6> My Wishlist</h6>
+</a> -->

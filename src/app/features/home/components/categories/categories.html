@@ -1,0 +1,12 @@
+<button class="category-toggle btn w-100 d-md-none d-flex justify-content-between align-items-center"
+        data-bs-toggle="collapse"
+        data-bs-target="#categoriesMenu">
+  <span>Categories</span>
+  <span class="arrow"><i class="bi bi-caret-down-fill"></i></span>
+</button>
+<!-- الكاتيجوري -->
+<div id="categoriesMenu" class="collapse d-md-block">
+  <div class="d-flex flex-column categories gap-2 pb-0 " >
+    <button *ngFor="let category of categories" (click)="goToCategory(category.id)">{{category.name}}</button>
+  </div>
+</div>

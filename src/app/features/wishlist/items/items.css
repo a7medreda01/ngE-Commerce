@@ -1,0 +1,8 @@
+.btn-move{
+    transition: .5s ease-in;
+}
+.btn-move:hover{
+    transform: scale(1.06);
+    color: white;
+    background-color: var(--primary-color);
+}

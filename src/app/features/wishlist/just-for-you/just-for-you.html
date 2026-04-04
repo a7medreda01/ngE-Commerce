@@ -1,0 +1,19 @@
+<div class="d-flex justify-content-between mb-5 align-content-center container">
+    <div class="d-flex ">
+        <div style="width: 17px; height: 40px;" class="before-div rounded-2"></div>
+        <p class="title-div p-2 ">Just For You</p>
+    </div>
+    <button class="view-all-btn btn">See All</button>
+</div>
+
+
+<div class="d-flex gap-4 flex-wrap justify-content-center">
+    <div *ngFor="let _ of [].constructor(4)">
+        <app-product-card [product]="product"></app-product-card>
+    </div>
+</div>
+
+<!-- //view all products -->
+
+
+<hr class="my-5">

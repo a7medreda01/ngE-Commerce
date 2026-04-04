@@ -1,0 +1,167 @@
+.sale-div {
+    min-height: 45px;
+    margin: auto;
+    align-content: center;
+    font-size: 17px;
+    padding: 3px;
+}
+
+.form-control {
+    height: 40px;
+    border-radius: 10px;
+    background-color: rgba(240, 237, 237, 0.278);
+
+}
+
+i.bi-search {
+    pointer-events: none;
+    font-size: 1rem;
+}
+.position-relative ::placeholder{
+    font-size: 12px;
+}
+.navbar-brand{
+    font-weight: 600;
+    font-size: 30px;
+}
+nav{
+border-bottom : 1px solid gray;
+}
+.icon{
+    position: relative;
+    font-size: 20px;
+    transition: .4s ease;
+}
+.icon:hover{
+    position: relative;
+    /* font-size: 22px; */
+    color: var(--primary-color);
+}
+.length{
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    font-size: 11px;
+    background-color: var(--primary-color);
+    border-radius: 50px;
+    color: white;
+    padding: 0px 10px 15px 4px;
+    height: 12px;
+    width:  12px;
+    margin: 0;
+}
+
+ .bi-person{
+        background-color: var(--primary-color);
+border-radius: 50px;
+    color: white;
+    padding: 5px;
+    margin: 10px;
+ }
+
+ @media (max-width:800px) {
+   .bi-person{
+        background-color: var(--primary-color);
+border-radius: 50px;
+    color: white;
+    padding: 2px;
+    margin: 0px;
+ }
+ }
+ /* profile icon  */
+ /* Container dropdown */
+.profile-dropdown {
+  min-width: 180px;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.dropdown-menu.show.profile-dropdown {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+
+
+.nox {
+  position: absolute;
+  top: 60px;
+  right: 110px;
+  width: 200px;
+  transform: translate(-50%, -50%);
+  background: rgba(255, 255, 255, 0.25); /* نصف شفافية */
+  backdrop-filter: blur(10px); /* Blur effect زي iOS */
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 10px;
+  padding: 20px;
+  color: #fff;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+  transition: all 0.3s ease; /* smooth animation */
+}
+
+.search-bar {
+  animation: slideDown 0.5s ease;
+}
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.container-nav{
+  flex-wrap: nowrap;
+}
+.navbar-toggler{
+  /* width: 20px; */
+  padding: 2px;
+  margin-right: 10px;
+}
+.navbar-toggler-icon{
+  width: 18px;
+}
+
+.mobile-menu {
+  background: rgba(255, 255, 255, 0.15); /* شفافية */
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 14px;
+  padding: 10px 14px;
+  color: #0a0909;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+  transition: all 0.3s ease;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+@media (max-width:800px) {
+  .nox {
+  position: absolute;
+  top: 60px;
+  right: 10px;
+
+}
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

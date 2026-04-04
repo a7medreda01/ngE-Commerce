@@ -1,0 +1,18 @@
+.links{
+    margin-left: 20px;
+    display: flex;
+    flex-direction: row;
+    margin-top: 15px;
+    margin-bottom: 20px;
+}
+.link-mav{
+    text-decoration: none;
+    color: gray;
+    padding: 4px;
+}
+
+
+
+.link-mav.active {
+  color: var(--primary-color) !important;
+}

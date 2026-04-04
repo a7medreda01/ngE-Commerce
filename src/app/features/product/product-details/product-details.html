@@ -1,0 +1,115 @@
+<div class="container my-5 " *ngIf="product">
+  <div class="row">
+
+    <!-- 🔹 Column 1 (Thumbnails) -->
+    <div class="col-md-2  gap-3 thumbnails">
+      <img *ngFor="let img of product.images" [src]="img" class="thumb" [class.active]="img === selectedImage"
+        (click)="selectImage(img)">
+    </div>
+
+    <!-- 🔹 Column 2 (Main Image) -->
+    <div class="col-md-5 text-center main-img-div">
+      <img [src]="selectedImage || product.images[0]" class="main-img img-fluid">
+    </div>
+ 
+    <!-- 🔹 Column 3 (Details) -->
+    <div class="col-md-4 ms-md-1 ms-lg-4 ">
+
+      <!-- Title -->
+      <h4 class="fw-bold">{{product.name}}</h4>
+
+      <div class="d-flex">
+        <!-- Rating -->
+        <div class="rating text-warning ">
+
+          <!-- Full Stars -->
+          <i class="bi bi-star-fill" *ngFor="let star of fullStars"></i>
+
+          <!-- Half Star -->
+          <i class="bi bi-star-half" *ngIf="halfStar"></i>
+
+          <!-- Empty Stars -->
+          <i class="bi bi-star" *ngFor="let star of emptyStars"></i>
+        </div>
+        <p class="text-black-50 ms-2">(10 reviews)</p>
+        <p class="text-black-50 ms-3">|</p>
+        @if(product.stockQuantity >0){
+        <p class="text-success ms-3">In stock</p>
+        }
+        @if(product.stockQuantity ==0){
+        <p class="text-danger-emphasis ms-3">Out of Stock</p>
+        }
+      </div>
+
+      <!-- Price -->
+      <h5 class="fw-bold ">${{product.price}}</h5>
+
+      <!-- Description -->
+      <p class="text-muted mt-3">
+        {{product.description}}
+      </p>
+
+      <hr>
+
+      <!-- Colors -->
+      <div class="mb-3">
+        <strong>Colours:</strong>
+        <span *ngFor="let c of colors" class="color-box" [ngClass]="c" [class.active]="selectedColor === c"
+          (click)="selectedColor = c">
+        </span>
+      </div>
+
+      <!-- Sizes -->
+      <div class="mb-3">
+        <strong>Size:</strong>
+        <button *ngFor="let s of sizes" class="btn btn-sm m-1"
+          [ngClass]="selectedSize === s ? 'btn-danger' : 'btn-outline-secondary'" (click)="selectedSize = s">
+          {{s}}
+        </button>
+      </div>
+
+      <!-- Quantity + Buttons -->
+      <div class="d-flex align-items-center gap-3 mb-3">
+
+        <div class="qty-box d-flex">
+          <button class="btn btn-light" (click)="decrease()">-</button>
+          <span class="px-3 d-flex align-items-center">{{product.quantity}}</span>
+          <button class="btn btn-light btn-increase text-light" (click)="increase()">+</button>
+        </div>
+
+        <button class="btn btn-danger px-4 w-50">Buy Now</button>
+
+        <button class="btn btn-outline-dark">
+          <i class="bi bi-heart"></i>
+        </button>
+      </div>
+
+      <!-- Delivery -->
+      <div class="delivery-box mb-2 d-flex align-items-center ">
+        <i class="bi bi-truck"></i>
+        <div>
+        <h6>Free Delivery </h6>
+        <small>Enter your postal code for Delivery Availability</small>
+        </div>
+      </div>
+            <!-- Delivery -->
+      <div class="delivery-box mb-2 d-flex align-items-center">
+        <i class="bi bi-arrow-repeat"></i>
+        <div>
+        <h6>Return Delivery </h6>
+        <small>Free 30 Days Delivery Returns</small>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="m-lg-4 m-1">
+    <ul>
+  <li *ngFor="let item of specsArray">
+    {{ item }}.
+  </li>
+</ul>
+
+  </div>
+  
+</div>

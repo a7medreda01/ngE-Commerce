@@ -1,0 +1,29 @@
+.homeLink {
+    text-decoration: none;
+    color: gray;
+}
+.not-found-text{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: large;
+    flex-direction: column;
+    
+}
+.text{
+    margin-top: 40px;
+      font-size: clamp(50px, 10vw, 150px);
+
+}
+h6{
+      font-size: clamp(5px, 3vw, 20px);
+
+}
+.btn-back{
+    background-color: var(--primary-color);
+    border-radius: 5px;
+    color: white;
+    padding: 10px 45px 10px 45px;
+    margin-top: 50px;
+    
+}

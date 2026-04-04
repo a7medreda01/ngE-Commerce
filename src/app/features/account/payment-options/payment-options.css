@@ -1,0 +1,78 @@
+
+
+/* CARD 3D */
+.card-preview {
+  max-width: 350px;
+
+  perspective: 1000px;
+}
+
+.card-preview .card {
+  width: 100%;
+  height: 200px;
+  border-radius: 15px;
+  padding: 20px;
+  color: white;
+  position: absolute;
+  backface-visibility: hidden;
+  transition: transform 0.6s;
+  max-width: 350px;
+
+}
+
+/* Front */
+.front {
+  background: linear-gradient(135deg, #ff416c, #ff4b2b);
+}
+
+/* Back */
+.back {
+  background: #333;
+  transform: rotateY(180deg);
+}
+.form-control{
+  max-width: 350px;
+
+}
+.form-control2{
+  max-width: 160px;
+}
+.card-preview {
+  position: relative;
+  height: 200px;
+}
+
+.card-preview.flip .front {
+  transform: rotateY(180deg);
+}
+
+.card-preview.flip .back {
+  transform: rotateY(360deg);
+}
+
+/* BACK SIDE */
+.strip {
+  height: 40px;
+  background: black;
+  margin-bottom: 20px;
+}
+
+.cvv-box {
+  background: white;
+  color: black;
+  padding: 5px;
+  width: 60px;
+  text-align: center;
+  margin-left: auto;
+}
+
+/* SAVED CARDS */
+.saved-card {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  border-radius: 8px;
+  background: #f8f9fa;
+  margin-bottom: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}

@@ -1,0 +1,71 @@
+.banner-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 أعمدة متساوية */
+  grid-auto-rows: 200px; /* ارتفاع كل صف */
+  gap: 15px;
+}
+
+.banner-item {
+  position: relative;
+  overflow: hidden;
+}
+
+.banner-item img {
+  width: 100%;
+  height: 100%; 
+  object-fit: cover;
+  border-radius: 10px;
+  transition: .8s ease;
+}
+.banner-item img:hover {
+transform: scale(1.15);
+}
+
+.shop-btn {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  padding: 6px 15px;
+  border-radius: 20px;
+  background-color: #000;
+  color: #fff;
+}
+
+/* أول بانر 2x2 */
+.banner-item.half {
+  grid-column: span 2; /* عرض = 2 أعمدة */
+  grid-row: span 2;    /* طول = 2 صفوف */
+}
+
+/* ثاني بانر 2x1 */
+.banner-item.quarter {
+  grid-column: span 2; /* عرض = 2 أعمدة */
+  grid-row: span 1;    /* طول = 1 صف */
+}
+
+/* الثالث والرابع 1x1 */
+.banner-item.quarter-small {
+  grid-column: span 1; /* عرض = 1 عمود */
+  grid-row: span 1;    /* طول = 1 صف */
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+  .banner-grid {
+    grid-template-columns: 1fr; /* عمود واحد */
+    grid-auto-rows: 180px;
+  }
+
+  .banner-item.half,
+  .banner-item.quarter,
+  .banner-item.quarter-small {
+    grid-column: span 1; /* full width */
+    grid-row: span 1;    /* طول واحد */
+  }
+}
+.before-div{
+  background-color: var(--primary-color);;
+}
+.title-div{
+  color: var(--primary-color);
+}

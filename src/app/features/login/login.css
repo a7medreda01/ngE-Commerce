@@ -1,0 +1,131 @@
+.img-register{
+    width: 50%;
+    object-fit: cover;
+}
+.input{
+    border: none;
+    border-bottom: 2px solid rgb(224, 222, 222);
+    width:80%;
+    padding: 5px;
+    margin-top: 25px;
+}
+.form{
+    width: 100%;
+}
+
+.login-forget{
+    width: 80%;
+
+}
+.forget{
+    margin-top: 30px;
+    text-decoration: none;
+    color: var(--primary-color);
+    width: 40%;
+    text-align: end;
+}
+.input::placeholder{
+    color: rgb(174, 172, 172);
+}
+.input:focus {
+    outline: none;
+}
+.create{
+    border-radius: 5px;
+    width: 60%;
+    background-color: var(--primary-color);
+    color: white;
+    padding: 10px;
+    margin-top: 30px;
+}
+.social-login {
+  text-align: center;
+  margin-top: 20px;
+  width: 80%;
+}
+
+.divider {
+  position: relative;
+  margin: 20px 0;
+}
+
+.divider span {
+  background: #fff;
+  padding: 0 10px;
+  color: #999;
+  font-size: 14px;
+}
+
+.divider::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 10%;
+  width: 80%;
+  height: 1px;
+  background: #ddd;
+  z-index: -1;
+}
+
+/* buttons */
+.social-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  font-weight: 500;
+  transition: 0.3s;
+  border: 1px solid #ddd;
+  background: #fff;
+}
+
+/* icons */
+.social-btn img {
+  width: 20px;
+  height: 20px;
+}
+
+/* Google */
+.google:hover {
+  background: #f5f5f5;
+}
+
+/* Apple */
+.apple {
+  background: #000;
+  color: #fff;
+  border: none;
+}
+
+.apple img {
+  filter: invert(1);
+}
+
+.apple:hover {
+  background: #222;
+}
+
+@media (max-width:800px) {
+    .img-register{
+    width: 80%;
+    object-fit: cover;
+}
+.form,.input,.create,.social-login,.social-btn{
+    width: 100%;
+    padding: 10px;
+}
+.img-register{
+    display: none;
+}
+.login-forget{
+    width: 100%;
+    flex-direction: column;
+}
+.forget{
+    margin-top: 10px;
+}
+}

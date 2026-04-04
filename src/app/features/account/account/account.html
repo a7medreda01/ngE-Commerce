@@ -1,0 +1,31 @@
+<div class="container">
+        <!-- //router-Link -->
+    <div class="links d-flex justify-content-between">
+        <div class="d-flex gap-2"><a routerLink="" class="homeLink">Home </a>
+            <p>/ My Account</p>
+        </div>
+        <div class="d-flex">
+        <p>Wellcom! </p>
+        <p class="text-danger">MO Premi</p>
+        </div>
+
+    </div>
+</div>
+
+<div class="container mt-4">
+  <div class="row">
+
+    <!-- Sidebar -->
+    <div class="col-md-3">
+      <app-sidebar></app-sidebar>
+    </div>
+
+    <!-- Content -->
+    <div class="col-md-9">
+      <div class="  div-router">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+
+  </div>
+</div>

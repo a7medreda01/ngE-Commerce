@@ -1,0 +1,17 @@
+.cartLink,.homeLink{
+    text-decoration: none;
+    color: gray;
+}
+.links{
+    margin-top: 50px;
+}
+.div-router{
+      box-shadow: 0 0 10px rgba(0,0,0,0.05); /* shadow خفيف */
+      padding: 70px;
+}
+@media (max-width:800px) {
+    .div-router{
+      box-shadow: 0 0 10px rgba(0,0,0,0.05); /* shadow خفيف */
+      padding: 10px;
+}
+}

@@ -1,0 +1,60 @@
+<div class="col-12">
+    @for(product of products ; track product)
+    {
+    <div class="d-flex justify-content-between p-3">
+        <div class="d-flex gap-2 align-items-center">
+            <img [src]="product.image" alt="" class="product-img">
+            <h6 class="ms-3">{{product.name}}</h6>
+        </div>
+        <h6>{{ product.price * product.quantity | currency:'USD' }}</h6>
+
+    </div>
+    }
+    <div class="d-flex flex-column p-3">
+        <div class="mt-3 d-flex justify-content-between">
+            <h6>SubTotal :</h6>
+            <h6>2332$</h6>
+        </div>
+        <hr>
+        <div class=" d-flex justify-content-between">
+            <h6>Shipping :</h6>
+            <h6>Free</h6>
+        </div>
+        <hr>
+        <div class=" d-flex justify-content-between">
+            <h4>Total :</h4>
+            <h4>2332$</h4>
+        </div>
+    </div>
+    <div>
+        <form>
+
+            <!-- Bank -->
+            <div class="payment-option">
+                <input type="radio" id="bank" name="payment" />
+                <label for="bank">
+                    <i class="bi bi-bank2"></i>
+                    Bank
+                </label>
+            </div>
+
+            <!-- Cash -->
+            <div class="payment-option">
+                <input type="radio" id="cash" name="payment" />
+                <label for="cash">
+                    <i class="bi bi-cash-coin"></i>
+                    Cash On Delivery
+                </label>
+            </div>
+
+        </form>
+    </div>
+
+
+    <div class="d-flex gap-2 flex-column flex-md-row col-12 mt-3">
+        <input type="text" placeholder="Coupon Code" class="coupon-input col-8 ">
+        <button class="btn border btn-coupon p-2 col-4">Apply Coupon</button>
+    </div>
+            <button class="btn border btn-coupon p-2 my-3 px-lg-4 col-lg-4">Place Order</button>
+
+</div>

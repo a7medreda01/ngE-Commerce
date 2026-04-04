@@ -1,0 +1,21 @@
+.banner-container{
+    position: relative;
+    height: 50vh;
+}
+.banner{
+        height: 50vh;
+
+    width: 100%;
+}
+img{
+  object-fit: cover;
+}
+.btn-buy{
+    position: absolute;
+    bottom: 50px;
+    left: 50px;
+    background-color:var(--primary-color);
+    color: white;
+    width: 140px;
+    height: 45px;
+}

@@ -1,0 +1,34 @@
+.shop-btn{
+background-color: var(--primary-color);
+border: none;
+padding: 20px;
+}
+.about-section {
+  background: #f9f9f9;
+}
+
+.about-img img {
+  max-width: 400px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.about-img img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 12px 25px rgba(0,0,0,0.2);
+}
+
+.about-text h2 {
+  font-weight: 700;
+  color: #222;
+}
+
+.about-text p {
+  color: #555;
+  line-height: 1.6;
+}
+
+.about-text .btn {
+  padding: 10px 25px;
+  font-weight: 600;
+  border-radius: 8px;
+}

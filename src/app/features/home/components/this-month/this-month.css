@@ -1,0 +1,11 @@
+.view-all-btn{
+  width: 160px;
+  background-color: var(--primary-color);
+  color: white;
+}
+.before-div{
+  background-color: var(--primary-color);
+}
+.title-div{
+  color: var(--primary-color);
+}

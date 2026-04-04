@@ -1,0 +1,22 @@
+
+.edit{
+    color: var(--primary-color);
+}
+.form-input {
+    height: 50px;
+    background-color: #f5f5f5;
+    border: none;
+    border-radius: 5px;
+
+}
+
+.form-input label {
+    color: gray;
+}
+
+#save-changes-btn {
+    width: 200px;
+    background-color: var(--primary-color);
+    color: white;
+    padding: 15px;
+}

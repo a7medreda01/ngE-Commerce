@@ -1,0 +1,16 @@
+<div class="d-flex mt-5">
+<div style="width: 17px; height: 40px;" class="before-div rounded-2"></div>
+<p class="title-div p-2 ">Categories</p>
+</div>
+  <h2 class="fw-bold m-0">Browes By Category</h2>
+<div class="d-flex justify-content-between flex-wrap  mt-5">
+
+  <div class="category-box text-center" *ngFor="let cat of categories">
+    
+    <i [class]="cat.icon + ' icon'"></i>
+    <h6 class="mt-2">{{ cat.name }}</h6>
+
+  </div>
+
+</div>
+<hr class="my-5">

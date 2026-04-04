@@ -1,0 +1,49 @@
+<div class="d-flex mt-1">
+<div style="width: 17px; height: 40px;" class="before-div rounded-2"></div>
+<p class="title-div p-2 ">ToDay`s</p>
+</div>
+
+
+<!-- flash sale  -->
+ <div class="flash-sale d-flex align-items-center gap-5 flex-wrap pb-4">
+
+  <!-- Title -->
+  <h2 class="fw-bold m-0">Flash Sales</h2>
+
+  <!-- Timer -->
+  <div class="timer d-flex align-items-center">
+
+    <div class="time-box">
+      <span>{{ days }}</span>
+      <small>Days</small>
+    </div>
+
+    <div class="time-box">
+      <span>{{ hours }}</span>
+      <small>Hours</small>
+    </div>
+
+    <div class="time-box">
+      <span>{{ minutes }}</span>
+      <small>Minutes</small>
+    </div>
+
+    <div class="time-box">
+      <span>{{ seconds }}</span>
+      <small>Seconds</small>
+    </div>
+
+  </div>
+
+</div>
+
+
+<app-four-product [products]="products"></app-four-product>
+
+
+<!-- //view all products -->
+ <div class="text-center mb-5">
+    <button class="view-all-btn btn" routerLink="products/flash">View All Products</button>
+ </div>
+
+ <hr>

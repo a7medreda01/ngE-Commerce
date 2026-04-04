@@ -1,0 +1,57 @@
+.product-img{
+    width: 50px;
+    height: 50px;
+    border-radius: 10px;
+    object-fit: cover;
+}
+.payment-option {
+    border: 1px solid #ddd;
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.payment-option input {
+    margin-right: 10px;
+}
+
+.payment-option label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    width: 100%;
+}
+
+/* hover effect */
+.payment-option:hover {
+    border-color: var(--primary-color);
+}
+
+/* checked style */
+.payment-option input:checked + label {
+    color: var(--primary-color);
+    font-weight: 500;
+}
+.btn-coupon{
+    background-color:var(--primary-color) ;
+    color: white;
+height: 50px;
+align-content: center;
+
+}
+
+.coupon-input{
+border: 1px solid black;
+border-radius: 8px;
+/* width: 250px; */
+height: 50px;
+padding: 10px;
+}
+.coupon-input::placeholder{
+padding: 10px;
+}

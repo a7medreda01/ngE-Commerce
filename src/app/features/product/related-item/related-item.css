@@ -1,0 +1,16 @@
+
+/* //flash */
+
+.flash-sale {
+  /* background: #f8f9fa; */
+  border-radius: 10px;
+}
+
+ 
+ 
+.before-div{
+  background-color: var(--primary-color);;
+}
+.title-div{
+  color: var(--primary-color);
+}
