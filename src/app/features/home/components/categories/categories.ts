@@ -16,6 +16,8 @@ export class Categories {
 
   ngOnInit(){
 this.getCatigories()
+        console.log(this.categories)
+
   }
 
 
@@ -24,7 +26,6 @@ this.getCatigories()
     this.catService.getAllCategories().subscribe({
       next:(res:any)=> {
         this.categories=res
-        console.log(this.categories)
       },
       error:(error:any)=>console.log(error)
     })

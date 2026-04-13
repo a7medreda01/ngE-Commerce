@@ -17,6 +17,9 @@ import { Register } from './features/register/register';
 import { Login } from './features/login/login';
 import { About } from './features/about/about/about';
 import { Products } from './features/products/products/products';
+import { OrderSuccess } from './features/checkOut/order-success/order-success';
+import { Order } from './features/account/my-orders/order/order';
+import { authGuard, guestGuard } from './core/guards/guards-guard';
 
 export const routes: Routes = [
   {
@@ -26,8 +29,8 @@ export const routes: Routes = [
       { path: '', component: Home }
     ]
   },
-  { path: 'wishlist', component: Wishlist },
-  { path: 'cart', component: Cart },
+  // { path: 'wishlist', component: Wishlist },
+  // { path: 'cart', component: Cart },
   { path: 'cart/checkOut', component: CheckOut },
   { path: 'account', component: Account },
   { path: 'home', component: MainLayout },
@@ -36,7 +39,7 @@ export const routes: Routes = [
     component: Account,
     children: [
       { path: '', redirectTo: 'edit', pathMatch: 'full' },
-      { path: 'edit', component: EditProfile },
+      { path: 'edit', component: EditProfile,canActivate: [authGuard] },
       { path: 'address', component: AddressBook },
       { path: 'payment', component: PaymentOptions },
       { path: 'my-orders', component: MyOrders },
@@ -47,11 +50,21 @@ export const routes: Routes = [
     ]
   },
   { path: 'product/:id', component: Product },
+  { path: 'order/:id', component: Order },
   { path: 'products/:type', component: Products },
-  { path: 'register', component: Register },
-  { path: 'login', component: Login },
+  // { path: 'register', component: Register },
+  // { path: 'login', component: Login },
   { path: 'about', component: About },
   { path: 'products', component: Products },
+  { path: 'order-success', component: OrderSuccess },
+  //   صفحات لازم login
+  { path: 'profile',component: Account,canActivate: [authGuard]},
+  { path: 'cart',component: Cart,canActivate: [authGuard]},
+  { path: 'wishlist',component: Wishlist,canActivate: [authGuard]},
+
+  //   صفحات للزوار بس
+  {path: 'login',component: Login,canActivate: [guestGuard]},
+  {path: 'register',component: Register,canActivate: [guestGuard]},
   { path: '**', component: Errorpage },
 
 ];

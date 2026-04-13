@@ -38,16 +38,19 @@
                 <li class="nav-item"><a class="nav-link" routerLink="">Home</a></li>
                 <li class="nav-item"><a class="nav-link" routerLink="contact">Contact</a></li>
                 <li class="nav-item"><a class="nav-link" routerLink="about">About</a></li>
-                <li class="nav-item"><a class="nav-link" routerLink="register">Join</a></li>
+                <li class="nav-item"><a class="nav-link" routerLink="register" *ngIf="!isLoggedIn">Join</a></li>
             </ul>
 
             <!-- Search input -->
-            <div class="position-relative d-none d-lg-flex ">
-                <input type="text" class="form-control pe-5" placeholder="What are you looking for ?">
-                <i class="bi bi-search position-absolute top-50 end-0 translate-middle-y me-3 text-muted"></i>
-            </div>
 
 
+            <form (ngSubmit)="onSearch()">
+                <div class="position-relative d-none d-lg-flex ">
+                    <input type="text" class="form-control pe-5" placeholder="What are you looking for ?"
+                        [(ngModel)]="searchText" name="searchText" (input)="onSearchChange($event)">
+                    <i class="bi bi-search position-absolute top-50 end-0 translate-middle-y me-3 text-muted"></i>
+                </div>
+            </form>
         </div>
 
         <!-- Favorite & Cart icons -->
@@ -59,7 +62,7 @@
                     <p class="length">{{wishLength}}</p>
                 </i></a>
             <a class="btn icon " routerLink="cart"><i class="bi bi-cart"></i>
-                <p class="length">{{cartLength}}</p>
+                <p class="length">{{cartCount}}</p>
             </a>
 
             <a class="btn icon profileicon" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
@@ -97,10 +100,13 @@
     </div>
 </nav>
 <!-- Search input -->
-<div class="position-relative d-lg-none m-2 search-bar" *ngIf="showSearch">
-    <input type="text" class="form-control pe-5" placeholder="What are you looking for ?">
-    <i class="bi bi-search position-absolute top-50 end-0 translate-middle-y me-3 text-muted"></i>
-</div>
+<form (ngSubmit)="onSearch()">
+    <div class="position-relative d-lg-none m-2 search-bar" *ngIf="showSearch">
+        <input type="text" class="form-control pe-5" placeholder="What are you looking for ?" [(ngModel)]="searchText"
+            name="searchText" (input)="onSearchChange($event)">
+        <i class="bi bi-search position-absolute top-50 end-0 translate-middle-y me-3 text-muted"></i>
+    </div>
+</form>
 
 <!-- Navbar links and content -->
 <div class="collapse navbar-collapse  d-lg-none " id="navbarContent">
@@ -108,7 +114,7 @@
         <li class="nav-item"><a class="nav-link" routerLink="">Home</a></li>
         <li class="nav-item"><a class="nav-link" routerLink="contact">Contact</a></li>
         <li class="nav-item"><a class="nav-link" routerLink="about">About</a></li>
-        <li class="nav-item"><a class="nav-link" routerLink="register">Join</a></li>
+        <li class="nav-item" *ngIf="!isLoggedIn"><a class="nav-link" routerLink="register">Join</a></li>
     </ul>
 
 </div>

@@ -7,13 +7,20 @@
 <!-- flash sale  -->
   <div class="d-flex justify-content-between mb-5 align-content-center">
   <h2 class="fw-bold m-0">Best Selling Products</h2>
-    <button class="view-all-btn btn" routerLink="products/best">View All</button>
+    <button class="view-all-btn btn" (click)="goToProducts()" >View All</button>
 
  </div>
 
 
-<app-four-product [products]="products"></app-four-product>
+<div class="best-selling-wrapper position-relative">
+  <ng-container *ngFor="let product of products">
+    <div class="badge-outer">
+      #1
+    </div>
+  </ng-container>
 
+  <app-four-product [products]="products"></app-four-product>
+</div>
 <!-- //view all products -->
 
 

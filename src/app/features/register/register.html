@@ -4,14 +4,15 @@
         <div class="form ">
             <h1>Create An Account</h1>
             <p class="mb-4">Enter your details below</p>
-            <form action="">
-                <input type="text" placeholder="Name" class="input">
-                <input type="email" placeholder="Email" class="input">
-                <input type="password" placeholder="Password" class="input">
-                <input type="password" placeholder="Confairm Password" class="input">
+            <form [formGroup]="registerForm" (ngSubmit)="submitRegister(registerForm)">
+                <input formControlName = "name" type="text" placeholder="Name" class="input" >
+                <input formControlName = "email" type="email" placeholder="Email" class="input">
+                <input formControlName = "phone" type="text" placeholder="phone" class="input">
+                <input formControlName = "password" type="password" placeholder="Password" class="input">
+                <input formControlName = "confirmPassword" type="password" placeholder="Confairm Password" class="input">
                 <button type="submit" class="btn btn create">Create Account</button>
             </form>
-
+            <div class="d-flex text-success justify-content-center align-items-center">{{Message}}</div>
             <!-- social register  -->
             <div class="social-login">
                 <p class="divider">

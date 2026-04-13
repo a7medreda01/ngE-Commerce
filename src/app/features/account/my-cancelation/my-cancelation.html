@@ -1,26 +1,46 @@
 <div class="container my-4">
-  <h4 class="title">My Cancelled Orders</h4>
+  <h4 class="title">My Orders</h4>
 
-  <div class="order-card mb-4 shadow-sm"
-       *ngFor="let order of cancelledOrders">
+  <ng-container *ngFor="let order of orders">
+
+  <div class="order-card mb-4 shadow-sm"   *ngIf="order.status === 'Canceled'">
 
     <!-- 🔹 Header -->
-    <div class="order-header d-flex justify-content-between flex-wrap">
-
+    <div class="order-header d-flex justify-content-between flex-wrap" >
       <div>
         <small>ORDER PLACED</small><br>
-        <strong>{{ order.date }}</strong>
+        {{ order.orderDate | date }}
       </div>
 
       <div>
         <small>TOTAL</small><br>
-        <strong>$ {{ getTotal(order) }}</strong>
+        <strong>$ {{order.totalPrice}}</strong>
       </div>
 
       <div>
         <small>STATUS</small><br>
-        <span class="badge bg-danger">
+        <span [ngSwitch]="order.status">
+
+          <span *ngSwitchCase="'Pending'" class="badge bg-warning text-dark">
+            Pending
+          </span>
+
+          <span *ngSwitchCase="'Delivered'" class="badge bg-success">
+            Delivered
+          </span>
+
+          <span *ngSwitchCase="'Cancelled'" class="badge bg-danger">
             Cancelled
+          </span>
+
+          <span *ngSwitchCase="'Shipped'" class="badge bg-info">
+            Shipped
+          </span>
+
+          <span *ngSwitchDefault class="badge bg-secondary">
+            {{ order.status }}
+          </span>
+
         </span>
       </div>
 
@@ -28,7 +48,6 @@
         <small>ORDER ID</small><br>
         <strong>#{{ order.id }}</strong>
       </div>
-
     </div>
 
     <!-- 🔹 Body -->
@@ -36,28 +55,23 @@
 
       <!-- 🧾 Items -->
       <div class="order-items">
-        <div *ngFor="let item of order.items">
-          {{ item.name }} × {{ item.quantity }}
+        <div *ngFor="let item of order.orderItems">
+          {{ item.productName }} × {{ item.quantity }}
         </div>
       </div>
 
       <!-- 🎯 Actions -->
-      <div class="order-actions text-end mt-3 mt-md-0">
-        <button class="btn btn-outline-secondary btn-sm me-2">
+      <div class="order-actions text-end mt-3 mt-md-0 d-flex flex-column gap-1">
+        <button class="btn btn-outline-primary btn-sm p-0" [routerLink]="['/order', order.id]">
           View Details
         </button>
 
-        <button class="btn btn-danger btn-sm">
-          Reorder
-        </button>
+
       </div>
 
     </div>
 
   </div>
-
-  <!-- ❌ لو مفيش -->
-  <div *ngIf="cancelledOrders.length === 0" class="text-center text-muted mt-5">
-    No cancelled orders
-  </div>
+</ng-container>
 </div>
+

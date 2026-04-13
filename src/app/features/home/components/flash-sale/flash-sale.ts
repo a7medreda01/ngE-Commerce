@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
 import { ProductCard } from '../../../../shared/components/product-card/product-card';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { ProductService } from '../../../../services/product/product-service';
 import { Product } from '../../../product/product/product';
 import { FourProduct } from '../../../../shared/components/four-product/four-product';
 
 @Component({
   selector: 'app-flash-sale',
-  imports: [FourProduct,RouterLink],
+  imports: [FourProduct],
   templateUrl: './flash-sale.html',
   styleUrl: './flash-sale.css',
 })
@@ -16,7 +16,7 @@ export class FlashSale {
 
 
   products:any;
-  constructor(private service :ProductService ){
+  constructor(private service :ProductService ,private router:Router){
     this.products=this.getAllProducts()
   }
 
@@ -29,7 +29,13 @@ export class FlashSale {
       error : (error)=> console.log(error)
     })
   }
-
+  goToProducts(){
+    this.router.navigate(['/products'],{
+      queryParams:{
+        type:'flash'
+      }
+    })
+  }
 // timer slae 
 
   days = 5;

@@ -1,27 +1,29 @@
 <div class="container d-flex justify-content-between flex-column flex-lg-row w-100">
 
   <!-- add  -->
-
   <div class="">
+
     <!-- Card Type Icons -->
     <div class="d-flex gap-3 mb-3">
       <img src="https://img.icons8.com/color/48/visa.png" width="50" />
       <img src="https://img.icons8.com/color/48/mastercard-logo.png" width="50" />
       <img src="https://upload.wikimedia.org/wikipedia/commons/9/93/PayPal_Logo2014.png" width="50" />
     </div>
+
     <!-- 💳 CARD PREVIEW -->
-    <div class="card-preview" [class.flip]="isFlipped" >
+    <div class="card-preview" [class.flip]="isFlipped">
+
       <!-- Front -->
-      <div class="card front"  
-     [ngStyle]="{'background': getCardColor(cardType)}"
-      
-      >
+      <div class="card front" [ngStyle]="{'background': getCardColor(cardType)}">
+
         <div class="d-flex justify-content-between text-center align-items-center">
           <div class="d-flex">
-            <img [src]="cardIcon" width="50" />
-            <p class="m-0 d-flex  ms-2 align-items-center">{{ cardType }}</p>
+            <img [src]="cardIcon" width="50" *ngIf="cardIcon" />
+            <p class="m-0 d-flex ms-2 align-items-center">{{ cardType }}</p>
           </div>
-          <span class="text-warning"><i class="bi bi-credit-card-fill"></i></span>
+          <span class="text-warning">
+            <i class="bi bi-credit-card-fill"></i>
+          </span>
         </div>
 
         <h5 class="mt-4">{{ cardNumber || '#### #### #### ####' }}</h5>
@@ -49,6 +51,7 @@
 
     <!-- 📝 FORM -->
     <form class="mt-4">
+
       <input class="form-control mb-2" placeholder="Card Number" [value]="cardNumber" (input)="onCardNumber($event)">
 
       <input class="form-control mb-2" placeholder="Card Holder" [value]="cardHolder"
@@ -71,23 +74,35 @@
       </button>
 
     </form>
-
   </div>
+
   <!-- 💾 SAVED CARDS -->
   <div class="mt-4">
-    @if(savedCards.length >0){
+
+    @if(savedCards.length > 0){
     <h6>Saved Cards</h6>
     }
-    <div class="saved-card" *ngFor="let c of savedCards; let i = index">
 
-      <div>
-        <img [src]="c.cardIcon" width="50" class="mx-2" />
-        {{ c.type }} - **** {{ c.last4 }}
+    <div class="saved-card" *ngFor="let c of savedCards">
+
+      <div class="d-flex flex-row">
+        <!-- icon -->
+        <img [src]="getCardIcon(c.cardType)" width="50" class="mx-2" />
+
+        <!-- data -->
+        <div class="d-flex flex-column">
+
+          <h6 class="p-0 m-0">{{ c.cardType }} - **** {{ c.cardNumber.slice(-4) }} </h6>
+          <p class="p-0 m-0 text-muted">**** {{c.cardName.slice(3)}}</p>
+
+        </div>
       </div>
-      <a (click)="deleteCard(i)" class="text-danger "><i class="bi bi-x-circle m-2 ms-5"></i></a>
-
+      <a (click)="deleteCard(c.id)" class="text-danger">
+        <i class="bi bi-x-circle m-2 ms-5"></i>
+      </a>
 
     </div>
+
   </div>
 
 </div>

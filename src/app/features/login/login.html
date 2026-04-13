@@ -4,14 +4,15 @@
         <div class="form ">
             <h1>Login To Exclusive</h1>
             <p class="mb-4">Enter your details below</p>
-            <form action="">
-                <input type="email" placeholder="Email" class="input">
-                <input type="password" placeholder="Password" class="input">
+            <form [formGroup]="loginForm" (ngSubmit)="submitLogin(loginForm)">
+                <input formControlName="email" type="email" placeholder="Email" class="input">
+                <input formControlName="password" type="password" placeholder="Password" class="input">
                 <div class="d-flex gap-2 align-items-center justify-content-between login-forget">
                     <button type="submit" class="btn btn create">Login</button>
                     <a href="" class="forget">Forget Password ?</a>
                 </div>
             </form>
+            <div class="d-flex text-success justify-content-center align-items-center">{{Message}}</div>
 
             <!-- social register  -->
             <div class="social-login">

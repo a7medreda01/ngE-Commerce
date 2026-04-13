@@ -1,17 +1,17 @@
-<div class="container my-5 " *ngIf="product">
+<div class="container mb-5 mt-3 " *ngIf="product">
   <div class="row">
 
     <!-- 🔹 Column 1 (Thumbnails) -->
-    <div class="col-md-2  gap-3 thumbnails">
+    <div class="col-md-2  gap-2 thumbnails ">
       <img *ngFor="let img of product.images" [src]="img" class="thumb" [class.active]="img === selectedImage"
         (click)="selectImage(img)">
     </div>
 
     <!-- 🔹 Column 2 (Main Image) -->
-    <div class="col-md-5 text-center main-img-div">
+    <div class="col-md-5 main-img-div ">
       <img [src]="selectedImage || product.images[0]" class="main-img img-fluid">
     </div>
- 
+
     <!-- 🔹 Column 3 (Details) -->
     <div class="col-md-4 ms-md-1 ms-lg-4 ">
 
@@ -31,7 +31,7 @@
           <!-- Empty Stars -->
           <i class="bi bi-star" *ngFor="let star of emptyStars"></i>
         </div>
-        <p class="text-black-50 ms-2">(10 reviews)</p>
+        <p class="text-black-50 ms-2">({{product.reviews.length}} reviews) {{product.rating}}/5</p>
         <p class="text-black-50 ms-3">|</p>
         @if(product.stockQuantity >0){
         <p class="text-success ms-3">In stock</p>
@@ -77,7 +77,7 @@
           <button class="btn btn-light btn-increase text-light" (click)="increase()">+</button>
         </div>
 
-        <button class="btn btn-danger px-4 w-50">Buy Now</button>
+        <button class="btn btn-danger px-4 w-50" (click)="addToCart(product.id, product.quantity)">Buy Now</button>
 
         <button class="btn btn-outline-dark">
           <i class="bi bi-heart"></i>
@@ -88,28 +88,125 @@
       <div class="delivery-box mb-2 d-flex align-items-center ">
         <i class="bi bi-truck"></i>
         <div>
-        <h6>Free Delivery </h6>
-        <small>Enter your postal code for Delivery Availability</small>
+          <h6>Free Delivery </h6>
+          <small>Enter your postal code for Delivery Availability</small>
         </div>
       </div>
-            <!-- Delivery -->
+      <!-- Delivery -->
       <div class="delivery-box mb-2 d-flex align-items-center">
         <i class="bi bi-arrow-repeat"></i>
         <div>
-        <h6>Return Delivery </h6>
-        <small>Free 30 Days Delivery Returns</small>
+          <h6>Return Delivery </h6>
+          <small>Free 30 Days Delivery Returns</small>
         </div>
       </div>
 
     </div>
   </div>
-  <div class="m-lg-4 m-1">
-    <ul>
-  <li *ngFor="let item of specsArray">
-    {{ item }}.
-  </li>
-</ul>
-
-  </div>
   
+
+
+    <!-- ///dtails  -->
+  <ul class="nav nav-pills col-12 mt-5">
+    <li class="nav-item col-4">
+      <button class=" nav-link-btn active " data-bs-toggle="pill" data-bs-target="#details">Details</button>
+    </li>
+    <li class="nav-item col-4">
+      <button class="nav-link-btn  " data-bs-toggle="pill" data-bs-target="#reviews">Reviews</button>
+    </li>
+    <li class="nav-item col-4">
+      <button class="nav-link-btn" data-bs-toggle="pill" data-bs-target="#faqs">FAQs</button>
+    </li>
+  </ul>
+
+  <div class="tab-content mt-3">
+    <!-- details  -->
+    <div class="tab-pane fade show active" id="details">
+      <div class="m-lg-4 m-1">
+        <ul>
+          <li *ngFor="let item of specsArray">
+            {{ item }}.
+          </li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- reviews  -->
+    <div class="tab-pane fade" id="reviews">
+      <div class="d-flex justify-content-between align-items-center mx-5 my-3">
+        <!-- Title + Count -->
+        <div class="d-flex gap-2 align-items-center">
+          <h5 class="mb-0">All Reviews</h5>
+          <h6 class="text-muted mb-0">({{product.reviews.length}})</h6>
+        </div>
+
+        <!-- Buttons -->
+        <div class="d-flex gap-2 align-items-center">
+          <!-- Filter button -->
+          <button class="btn bg-dark-subtle rounded-pill d-none d-md-flex p-2">
+            <i class="bi bi-sliders2-vertical"></i>
+          </button>
+
+          <!-- Sort dropdown -->
+          <div class="dropdown">
+            <button class="btn bg-dark-subtle rounded-pill dropdown-toggle p-2" type="button" data-bs-toggle="dropdown">
+              Sort by
+            </button>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">Newest</a></li>
+              <li><a class="dropdown-item" href="#">Oldest</a></li>
+            </ul>
+          </div>
+
+          <!-- Write Review button -->
+          <button class="btn write-btn rounded-pill d-none d-md-flex px-3 py-2">
+            Write a Review
+          </button>
+        </div>
+      </div>
+      <div class="m-lg-4 m-1">
+        <div class="d-flex flex-wrap justify-content-center gap-4 ">
+          <div *ngFor="let item of product.reviews" class="card col-md-5 p-3  col-10">
+
+            <!-- ⭐ Stars -->
+            <div class="mb-2">
+              <i *ngFor="let star of [1,2,3,4,5]" class="bi"
+                [ngClass]="star <= (item?.rating ??0) ? 'bi-star-fill text-warning' : 'bi-star text-muted'">
+              </i>
+            </div>
+
+            <!-- 👤 Name + Verified -->
+            <div class="fw-bold">
+              {{ item.userName }}
+              <i class="bi bi-patch-check-fill text-success ms-1"></i>
+            </div>
+
+            <!-- 💬 Comment -->
+            <div class="text-muted my-2">
+              {{ item.comment }}
+            </div>
+
+            <!-- 📅 Date -->
+            <div class="small text-secondary">
+              {{ item.createdAt | date:'mediumDate' }}
+            </div>
+
+          </div>
+        </div>
+        <div class="mt-4 d-flex justify-content-center">
+          <button class="btn border-1 border px-3 rounded-pill">Load more reviews</button>
+          <button class="btn px-lg-3 p-0 rounded-pill d-md-none write-btn">Write a Review</button>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- FAQs  -->
+    <div class="tab-pane fade" id="faqs">
+      <app-product-faqs></app-product-faqs>
+    </div>
+  </div>
+
+
 </div>

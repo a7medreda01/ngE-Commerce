@@ -2,20 +2,21 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { ProductCard } from '../../../../shared/components/product-card/product-card';
 import { ProductService } from '../../../../services/product/product-service';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { Product } from '../../../../models/product-model';
 import { FourProduct } from '../../../../shared/components/four-product/four-product';
 
 @Component({
   selector: 'app-this-month',
-  imports: [FourProduct,RouterLink],
+  imports: [FourProduct,CommonModule],
   templateUrl: './this-month.html',
   styleUrl: './this-month.css',
 })
 export class ThisMonth {
  products:any;
-  constructor(private service :ProductService ){
+  constructor(private service :ProductService,private router :Router ){
     this.products=this.getAllProducts()
+    
   }
 
   getAllProducts(){
@@ -27,4 +28,12 @@ export class ThisMonth {
       error : (error)=> console.log(error)
     })
   }
+    goToProducts(){
+    this.router.navigate(['/products'],{
+      queryParams:{
+        type:'best'
+      }
+    })
+  }
+  
 }

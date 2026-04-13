@@ -24,6 +24,7 @@ export class Filter {
 
   ngOnInit(){
     this.getCatigories()
+    this.setInitialFilterState() 
   }
   
   applyFilter() {
@@ -52,6 +53,19 @@ export class Filter {
     })
   }
 
+  showFilter!:boolean;
 
+setInitialFilterState() {
+  if (window.innerWidth <= 768) {
+    // موبايل
+    this.showFilter = false;
+  } else {
+    // لاب / ديسكتوب
+    this.showFilter = true;
+  }}
+
+  showFilterToggel(){
+    this.showFilter = !this.showFilter
+  }
   
 }

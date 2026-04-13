@@ -9,3 +9,17 @@
 .title-div{
   color: var(--primary-color);
 }
+.best-selling-wrapper {
+  position: relative;
+}
+
+.badge-outer {
+  position: absolute;
+  top: 55px;
+  left: 30px; 
+  background-color: gold;
+  padding: 5px 10px;
+  border-radius: 10px;
+  font-weight: bold;
+  z-index: 10;
+}

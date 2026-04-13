@@ -1,39 +1,42 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { OrderService } from '../../../services/order-service/order-service';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-my-cancelation',
-  imports: [CommonModule],
+  imports: [CommonModule,RouterLink],
   templateUrl: './my-cancelation.html',
   styleUrl: './my-cancelation.css',
 })
 export class MyCancelation {
-orders = [
-  {
-    id: 12345,
-    date: 'March 25, 2026',
-    items: [
-      { name: 'Cake', quantity: 2, price: 20 },
-    ],
-    status: 'Cancelled'
-  },
-  {
-    id: 67890,
-    date: 'March 27, 2026',
-    items: [
-      { name: 'Book', quantity: 1, price: 50 }
-    ],
-    status: 'Delivered'
+  constructor(private orderService: OrderService) {
+    this.getOrders()
+   }
+  orders: any;
+  getOrders() {
+    this.orderService.getUserOrders().subscribe({
+      next: (res: any) => {
+        this.orders = res
+        console.log(res)
+      },
+      error: (error: any) => console.log(error)
+    })
   }
-];
 
-// فلترة الأوردرات الملغية فقط
-get cancelledOrders() {
-  return this.orders.filter(o => o.status === 'Cancelled');
+
+  showCancel = false;
+selectedOrderId!: number ;
+
+openCancel(id: number) {
+  this.selectedOrderId = id;
+  this.showCancel = true;
 }
 
-// حساب التوتال
-getTotal(order: any): number {
-  return order.items.reduce((sum: number, item: any) => sum + item.quantity * item.price, 0);
+closeCancel() {
+  this.showCancel = false;
 }
+
+
+
 }

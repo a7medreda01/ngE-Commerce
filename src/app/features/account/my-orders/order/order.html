@@ -1,0 +1,102 @@
+<div class="container my-5">
+
+  <!-- Order Header -->
+  <div class="order-header card shadow-sm p-4 mb-4">
+    <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
+      <div>
+        <h5 class="mb-1">Order #{{order?.id}}</h5>
+        <small class="text-muted">{{order?.orderDate | date:'medium'}}</small>
+      </div>
+
+<span class="badge status-badge d-flex align-items-center gap-2">
+
+  <ng-container [ngSwitch]="order?.status">
+
+    <i *ngSwitchCase="'Pending'" class="bi bi-hourglass-split"></i>
+
+    <i *ngSwitchCase="'Delivered'" class="bi bi-check-circle-fill"></i>
+
+    <i *ngSwitchCase="'Cancelled'" class="bi bi-x-circle-fill"></i>
+
+    <i *ngSwitchCase="'Shipped'" class="bi bi-truck"></i>
+
+    <i *ngSwitchDefault class="bi bi-question-circle"></i>
+
+  </ng-container>
+
+  {{order?.status}}
+</span>
+    </div>
+  </div>
+
+  <!-- Stepper -->
+  <div class="stepper mb-5">
+    <div class="step" *ngFor="let step of orderSteps; let i = index">
+      
+<div class="step-circle"
+  [ngClass]="{
+    'done': i < getStepIndex(order?.status),
+    'active': i === getStepIndex(order?.status)
+  }">
+
+  <!-- لو step خلصت -->
+  <i *ngIf="i < getStepIndex(order?.status)" class="bi bi-check"></i>
+
+  <!-- لو current أو لسه -->
+  <ng-container *ngIf="i >= getStepIndex(order?.status)">
+
+    <i *ngIf="i === 0" class="bi bi-bag"></i>          <!-- Order Placed -->
+    <i *ngIf="i === 1" class="bi bi-box-seam"></i>     <!-- Processing -->
+    <i *ngIf="i === 2" class="bi bi-truck"></i>        <!-- Shipped -->
+    <i *ngIf="i === 3" class="bi bi-check-circle"></i> <!-- Delivered -->
+
+  </ng-container>
+
+</div>
+
+      <div class="step-title">{{ step }}</div>
+
+      <div class="step-line"
+        *ngIf="i < orderSteps.length - 1"
+        [ngClass]="{
+          'active-line': i < getStepIndex(order?.status)
+        }">
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Order Items -->
+  <div class="card shadow-sm p-4">
+    <h5 class="mb-4">Order Items</h5>
+
+    <div *ngFor="let item of order?.orderItems" 
+         class="order-item d-flex align-items-center justify-content-between flex-wrap gap-3">
+
+      <!-- Left -->
+      <div class="d-flex align-items-center gap-3">
+        <!-- <img [src]="item.imageUrl || 'assets/placeholder.png'" class="item-img"> -->
+
+        <div>
+          <h6 class="mb-1">{{item.productName}}</h6>
+          <small class="text-muted">Qty: {{item.quantity}}</small>
+        </div>
+      </div>
+
+      <!-- Right -->
+      <div class="text-end">
+        <div class="text-muted small">{{item.price}}$</div>
+        <strong class="text-dark">{{item.price * item.quantity}}$</strong>
+      </div>
+
+    </div>
+
+    <hr>
+
+    <div class="d-flex justify-content-between align-items-center">
+      <h5 class="mb-0">Total</h5>
+      <h5 class="text-success mb-0">{{order?.totalPrice}}$</h5>
+    </div>
+  </div>
+
+</div>

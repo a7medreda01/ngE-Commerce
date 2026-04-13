@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ProductCard } from '../../../shared/components/product-card/product-card';
 import { CommonModule } from '@angular/common';
+import { ProductService } from '../../../services/product/product-service';
 
 @Component({
   selector: 'app-just-for-you',
@@ -9,12 +10,13 @@ import { CommonModule } from '@angular/common';
   styleUrl: './just-for-you.css',
 })
 export class JustForYou {
- product: any = {
-    name: 'Cake',
-    price: 20,
-    oldPrice: 30,
-    rating: 4,
-    image: 'assets/images/banner4.jpg'
-  }
+products:any;
+constructor(private productService:ProductService){this.getProducts()}
 
+getProducts(){
+  this.productService.getAllProducts().subscribe({
+    next:(res:any)=>this.products=res,
+    error:(error:any)=>console.log(error)
+  })
+}
 }

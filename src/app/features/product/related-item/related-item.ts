@@ -6,7 +6,7 @@ import { FourProduct } from '../../../shared/components/four-product/four-produc
 
 @Component({
   selector: 'app-related-item',
-  imports: [FourProduct,CommonModule],
+  imports: [CommonModule,ProductCard],
   templateUrl: './related-item.html',
   styleUrl: './related-item.css',
 })

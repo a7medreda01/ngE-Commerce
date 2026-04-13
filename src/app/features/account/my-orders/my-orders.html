@@ -1,24 +1,46 @@
 <div class="container my-4">
   <h4 class="title">My Orders</h4>
 
-  <div class="order-card mb-4 shadow-sm" *ngFor="let order of orders">
+  <ng-container *ngFor="let order of orders">
+
+  <div class="order-card mb-4 shadow-sm"   *ngIf="order.status != 'Canceled'">
 
     <!-- 🔹 Header -->
-    <div class="order-header d-flex justify-content-between flex-wrap">
+    <div class="order-header d-flex justify-content-between flex-wrap" >
       <div>
         <small>ORDER PLACED</small><br>
-        <strong>{{ order.date }}</strong>
+        {{ order.orderDate | date }}
       </div>
 
       <div>
         <small>TOTAL</small><br>
-        <strong>$ {{ getTotal(order) }}</strong>
+        <strong>$ {{order.totalPrice}}</strong>
       </div>
 
       <div>
         <small>STATUS</small><br>
-        <span class="badge" [ngClass]="getStatusClass(order.status)">
-          {{ order.status }}
+        <span [ngSwitch]="order.status">
+
+          <span *ngSwitchCase="'Pending'" class="badge bg-warning text-dark">
+            Pending
+          </span>
+
+          <span *ngSwitchCase="'Delivered'" class="badge bg-success">
+            Delivered
+          </span>
+
+          <span *ngSwitchCase="'Cancelled'" class="badge bg-danger">
+            Cancelled
+          </span>
+
+          <span *ngSwitchCase="'Shipped'" class="badge bg-info">
+            Shipped
+          </span>
+
+          <span *ngSwitchDefault class="badge bg-secondary">
+            {{ order.status }}
+          </span>
+
         </span>
       </div>
 
@@ -33,19 +55,21 @@
 
       <!-- 🧾 Items -->
       <div class="order-items">
-        <div *ngFor="let item of order.items">
-          {{ item.name }} × {{ item.quantity }}
+        <div *ngFor="let item of order.orderItems">
+          {{ item.productName }} × {{ item.quantity }}
         </div>
       </div>
 
       <!-- 🎯 Actions -->
-      <div class="order-actions text-end mt-3 mt-md-0">
-        <button class="btn btn-outline-primary btn-sm me-2">
+      <div class="order-actions text-end mt-3 mt-md-0 d-flex flex-column gap-1">
+        <button class="btn btn-outline-danger btn-sm  p-0" (click)="openCancel(order.id)" *ngIf="order.status != 'Delivered'">
+          Cancel
+        </button>
+        <button class="btn btn-outline-primary btn-sm p-0" [routerLink]="['/order', order.id]">
           View Details
         </button>
 
-        <button class="btn btn-outline-secondary btn-sm"
-                *ngIf="order.status === 'Delivered'">
+        <button class="btn btn-outline-secondary btn-sm btn-buy" *ngIf="order.status === 'Delivered'">
           Buy Again
         </button>
       </div>
@@ -53,4 +77,30 @@
     </div>
 
   </div>
+</ng-container>
+</div>
+
+
+<!--  Overlay  cancel--> 
+<div class="overlay" *ngIf="showCancel">
+
+  <!-- Modal -->
+  <div class="confirm-box">
+
+    <h5>Cancel Order</h5>
+    <p>Are you sure you want to cancel this order?</p>
+
+    <div class="actions">
+      <button class="btn btn-light me-2" (click)="closeCancel()">
+        No
+      </button>
+
+      <button class="btn btn-danger"
+               (click)="cancelOrder()">
+        Yes, Cancel
+      </button>
+    </div>
+
+  </div>
+
 </div>

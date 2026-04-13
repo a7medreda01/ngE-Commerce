@@ -1,37 +1,113 @@
-<table class="cart-table">
-    <thead>
-        <tr class="table-header">
-            <th>Product</th>
-            <th>Price</th>
-            <th>Quantity</th>
-            <th>Subtotal</th>
-        </tr>
-    </thead>
-    <tbody>
-        @for(product of products; track product){
-        <tr>
-            <!-- Product Name + Image -->
-            <td class="product-cell">
-                <div class="img-wrapper">
-                    <img [src]="product.image" alt="" class="img" width="50" />
-                    <a href="#" class="remove-btn">
-                        <i class="bi bi-x-circle-fill"></i>
-                    </a>
-                </div>
-                {{ product.name }}
-            </td>
-            <!-- Price -->
-            <td>{{ product.price | currency:'USD' }}</td>
+<div class="container">
+    <table class="cart-table">
+        <thead>
+            <tr class="table-header" *ngIf="items?.items?.length > 0">
+                <th>Product</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Subtotal</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for(product of items.items; track product){
+            <tr>
+                <!-- Product Name + Image -->
+                <td class="product-cell">
+                    <div class="img-wrapper">
+                        <img [src]="product.pictureUrl" alt="" class="img" width="50" />
+                        <button class="remove-btn" (click)="removeItem(product.quantity,product.productId)">
+                            <i class="bi bi-x-circle-fill"></i>
+                        </button>
+                    </div>
+                    {{ product.name }}
+                </td>
+                <!-- Price -->
+                <td>{{ product.price | currency:'USD' }}</td>
 
-            <!-- Quantity Input -->
-            <td>
-                <input type="number" class="form-control quantity-input" [(ngModel)]="product.quantity" min="1"
-                    style="width: 60px;" />
-            </td>
+                <!-- Quantity Input -->
+                <td>
+                    <input type="number" class="form-control quantity-input" [(ngModel)]="product.quantity" min="1"
+                        style="width: 60px;" (ngModelChange)="updateCart( product.quantity,product.productId)" />
+                </td>
 
-            <!-- Subtotal -->
-            <td>{{ product.price * product.quantity | currency:'USD' }}</td>
-        </tr>
-        }
-    </tbody>
-</table>
+                <!-- Subtotal -->
+                <td>{{ product.totalPrice | currency:'USD' }}</td>
+            </tr>
+            }
+        </tbody>
+        <div class="d-flex flex-column justify-content-center align-items-center text-center m-5"
+            *ngIf="items?.items?.length == 0">
+
+            <h3 class="mb-4">
+                <i class="bi bi-cart3 fs-1 text-muted pe-2"></i>
+                Cart Empty
+            </h3>
+            <button class="btn btn-move btn-lg px-4" [routerLink]="['']">
+                Return To Shop
+            </button>
+
+        </div>
+    </table>
+
+
+    <!-- end of items  -->
+
+    <div class="my-4 d-flex justify-content-between " *ngIf="items?.items?.length > 0">
+        <button class="btn  btn-move p-2 px-lg-4" routerLink="">Return To Shop</button>
+        <button class="btn  btn-move bg-danger text-light border-0 p-2 px-lg-4" (click)="clearCart()">Clear
+            Cart</button>
+    </div>
+
+    <div class="my-4 mt-5 d-flex flex-column flex-md-row justify-content-between mt-5 gap-5"
+        *ngIf="items?.items?.length > 0">
+        <div class="d-flex gap-2 flex-column flex-md-row col-md-6">
+            <div class="position-relative col-lg-7">
+
+                <input #couponInput type="text" placeholder="Coupon Code" class="coupon-input form-control pe-5">
+
+                <!-- ✅ Valid -->
+                <i class="bi bi-check-circle-fill text-success position-absolute  end-0 translate-middle-y me-3"
+                    *ngIf="couponResult?.isValid">
+                </i>
+
+                <!-- ❌ Invalid -->
+                <i class="bi bi-x-circle-fill text-danger position-absolute   end-0 translate-middle-y me-3"
+                    *ngIf="couponResult && !couponResult.isValid">
+                </i>
+
+            </div>
+
+            <button class="btn border btn-coupon p-2 px-lg-4 col-lg-4" (click)="ApplyCoupon(couponInput.value)">
+                Apply Coupon
+            </button>
+        </div>
+        <div class="total-div col-12 col-md-6">
+            <h5 class="mb-5">Cart Total</h5>
+            <div class="d-flex justify-content-between">
+                <p>SubTotal :</p>
+                <p>{{items.totalPrice}}$</p>
+            </div>
+            <hr>
+            <div class="d-flex justify-content-between">
+                <p>Shipping :</p>
+                <p>Free</p>
+            </div>
+            <hr class="m-3">
+            <div class="d-flex justify-content-between">
+                <h4>Total :</h4>
+                <h4>{{items.totalPrice + 0}}$</h4>
+            </div>
+            <div class="d-flex justify-content-between" *ngIf="couponResult.finalTotal">
+                <h4>Discount :</h4>
+                <h4>{{couponResult.discount}}$</h4>
+            </div>
+            <div class="d-flex justify-content-between" *ngIf="couponResult.finalTotal">
+                <h4>Final Total :</h4>
+                <h4>{{couponResult.finalTotal}}$</h4>
+            </div>
+            <div class="d-flex justify-content-center">
+                <a class="btn border btn-coupon p-2 px-lg-4 mt-3 " routerLink="checkOut">Proccess To Check</a>
+            </div>
+        </div>
+    </div>
+</div>

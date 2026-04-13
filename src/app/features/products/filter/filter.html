@@ -12,60 +12,50 @@
 <div class="rounded-5 p-4 border border-1">
   <div class="d-flex justify-content-between">
     <h6>Filters</h6>
-    <i class="bi bi-sliders2-vertical"></i>
+    <i class="bi bi-sliders2-vertical bi-filter" (click)="showFilterToggel()"></i>
   </div>
-  <hr>
 
-  <!-- Category -->
-  <h6 class="mb-3 fw-bold">Category</h6>
-  <div class="mb-4">
-    <div class="form-check mb-2" *ngFor="let cat of categories">
-      <input class="form-check-input " type="radio"
-             name="category"
-             [value]="cat.id"
-             [(ngModel)]="filters.category"
-             (ngModelChange)="applyFilter()" >
-      <label class="form-check-label">
-        {{cat.name}}
-      </label>
+  <div *ngIf="showFilter" class="overlay">
+
+    <hr>
+
+    <!-- Category -->
+    <h6 class="mb-3 fw-bold" >Category</h6>
+    <div class="mb-4">
+      <div class="form-check mb-2" *ngFor="let cat of categories">
+        <input class="form-check-input " type="radio" name="category" [value]="cat.id" [(ngModel)]="filters.category"
+          (ngModelChange)="applyFilter()">
+        <label class="form-check-label">
+          {{cat.name}}
+        </label>
+      </div>
+    </div>
+    <div>
+      <!-- Price Range -->
+      <h6 class="mb-3 fw-bold">Price</h6>
+
+      <div class="mb-3">
+        <input type="range" class="form-range" min="0" max="10000" [(ngModel)]="filters.max" (input)="applyFilter()">
+      </div>
+
+      <div class="d-flex gap-2 mb-4">
+        <input type="number" class="form-control" placeholder="Min" [(ngModel)]="filters.min" (input)="applyFilter()">
+        <input type="number" class="form-control" placeholder="Max" [(ngModel)]="filters.max" (input)="applyFilter()">
+      </div>
+
+      <!-- Rating -->
+      <h6 class="mb-3 fw-bold">Rating</h6>
+
+      <div class="rating mb-4">
+        <i class="fa fa-star" *ngFor="let star of [1,2,3,4,5]" [class.active]="star <= filters.rating"
+          (click)="filters.rating = star ;applyFilter()">
+        </i>
+      </div>
+
+      <!-- Button -->
+      <button class="btn btn-dark w-100 d-none d-md-inline" (click)="applyFilter()">Apply Filter</button>
+      <button class="btn btn-dark w-100 d-md-none" (click)="applyFilter()" (click)="showFilterToggel()">Apply Filter</button>
+
     </div>
   </div>
-<div> 
-  <!-- Price Range -->
-  <h6 class="mb-3 fw-bold">Price</h6>
-
-  <div class="mb-3">
-    <input type="range"
-           class="form-range"
-           min="0" max="10000"
-           [(ngModel)]="filters.max"
-           (input)="applyFilter()">
-  </div>
-
-  <div class="d-flex gap-2 mb-4">
-    <input type="number" class="form-control" placeholder="Min"
-           [(ngModel)]="filters.min"
-           (input)="applyFilter()">
-    <input type="number" class="form-control" placeholder="Max"
-           [(ngModel)]="filters.max"
-           (input)="applyFilter()">
-  </div>
-
-  <!-- Rating -->
-  <h6 class="mb-3 fw-bold">Rating</h6>
-
-  <div class="rating mb-4">
-    <i class="fa fa-star"
-       *ngFor="let star of [1,2,3,4,5]"
-       [class.active]="star <= filters.rating"
-       (click)="filters.rating = star ;applyFilter()">
-    </i>
-  </div>
-
-  <!-- Button -->
-  <button class="btn btn-dark w-100" (click)="applyFilter()">
-    Apply Filter
-  </button>
-
-</div>
 </div>

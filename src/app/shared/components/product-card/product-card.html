@@ -3,12 +3,18 @@
   <!-- Image + overlay -->
   <div class="position-relative overflow-hidden">
 
-    <img [src]="product.images[0]" [routerLink]="['/product', product.id]" class="card-img-top" alt="product" >
+    <img [src]="product.images[0]" [routerLink]="['/product', product.id]" class="card-img-top" alt="product">
 
     <!-- Icons -->
     <div class="icons position-absolute top-0 end-0 p-2 d-flex flex-column">
-      <a href="#" class="icon-btn mb-2"><i class="bi bi-heart"></i></a>
-      <a href="#" class="icon-btn"><i class="bi bi-eye"></i></a>
+      
+      <a (click)="toggleWishlist()" class="icon-btn">
+        <i class="bi"     [ngClass]="(isInWishlist$ | async) ? 'bi-heart-fill text-danger' : 'bi-heart'">
+
+        </i>
+      </a>
+      
+      <a href="#" class="icon-btn" [routerLink]="['/product', product.id]"><i class="bi bi-eye" ></i></a>
     </div>
 
     <!-- sale  -->
@@ -21,15 +27,17 @@
 
     <!-- Add to cart (hidden يظهر hover) -->
     <div class="overlay d-flex justify-content-center align-items-center">
-      <button class="btn btn-dark w-100">Add to Cart</button>
+      <button class="btn btn-dark w-100" *ngIf="!addedCart" (click)="addToCart(product.id)">Add to Cart</button>
+      <button class="btn btn-success w-100" *ngIf="addedCart">Added<i class="bi bi-bag-check-fill ms-2"></i></button>
     </div>
 
   </div>
 
   <!-- Content -->
   <div class="card-body text-center" [routerLink]="['/product', product.id]">
-    <h6 class="card-title">{{ product.name }}</h6>
-
+    <h6 class="card-title one-line-ellipsis">
+      {{ product.name }}
+    </h6>
     <div class="price mb-2">
       <span class=" product-price me-2">{{ product.price }}$</span>
       <span class="text-muted text-decoration-line-through">

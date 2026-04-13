@@ -1,52 +1,53 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { OrderService } from '../../../services/order-service/order-service';
+import {  RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-my-orders',
-  imports: [CommonModule],
+  imports: [CommonModule,RouterModule],
   templateUrl: './my-orders.html',
   styleUrl: './my-orders.css',
 })
 export class MyOrders {
-orders = [
-  {
-    id: 12345,
-    date: 'March 25, 2026',
-    items: [
-      { name: 'Cake', quantity: 2, price: 20 },
-      { name: 'Cookie', quantity: 5, price: 5 }
-    ],
-    status: 'Delivered'
-  },
-  {
-    id: 67890,
-    date: 'March 27, 2026',
-    items: [
-      { name: 'Book', quantity: 1, price: 50 }
-    ],
-    status: 'Pending'
-  }
-];
 
-  getTotal(order: any): number {
-    return order.items.reduce((sum: number, item: any) => sum + item.quantity * item.price, 0);
+  constructor(private orderService: OrderService) {
+    this.getOrders()
+   }
+  orders: any;
+  getOrders() {
+    this.orderService.getUserOrders().subscribe({
+      next: (res: any) => {
+        this.orders = res
+        console.log(res)
+      },
+      error: (error: any) => console.log(error)
+    })
   }
-  getItemsText(order: any): string {
-    return order.items.map((i: any) => `${i.name} x${i.quantity}`).join(', ');
+  cancelOrder(){
+    this.orderService.cancelOrder(this.selectedOrderId).subscribe({
+      next: (res: any) => {
+        console.log(res)
+        this.getOrders()
+  this.showCancel = false;
+
+      },
+      error: (error: any) => console.log(error)
+    })
   }
-  getStatusClass(status: string) {
-  switch(status) {
-    case 'Delivered':
-      return 'bg-success';   // أخضر
-    case 'Pending':
-      return 'bg-warning text-dark';   // أصفر
-    case 'Shipped':
-      return 'bg-info text-dark';   // أزرق فاتح
-    case 'Cancelled':
-      return 'bg-danger';   // أحمر
-    default:
-      return 'bg-secondary';
-  }
+
+  showCancel = false;
+selectedOrderId!: number ;
+
+openCancel(id: number) {
+  this.selectedOrderId = id;
+  this.showCancel = true;
 }
+
+closeCancel() {
+  this.showCancel = false;
+}
+
+
 
 }
