@@ -16,7 +16,8 @@ export class ProductService {
     max?: number,
     type?: string,
     category?: number,
-    rating?: number
+    rating?: number,
+    pageSize?:number
   ) {
     let params: any = {};
 
@@ -26,6 +27,7 @@ export class ProductService {
     if (type) params.Type = type;
     if (category) params.ProductTypeId = category;
     if (rating) params.Rating = rating;
+    if (pageSize) params.pageSize = pageSize;
 
 
     return this.http.get(`${environment.baseUrl}products`, { params });

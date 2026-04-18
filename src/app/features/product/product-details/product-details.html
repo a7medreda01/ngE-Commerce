@@ -51,7 +51,7 @@
 
       <hr>
 
-      <!-- Colors -->
+      <!-- Colors
       <div class="mb-3">
         <strong>Colours:</strong>
         <span *ngFor="let c of colors" class="color-box" [ngClass]="c" [class.active]="selectedColor === c"
@@ -59,14 +59,14 @@
         </span>
       </div>
 
-      <!-- Sizes -->
+      Sizes
       <div class="mb-3">
         <strong>Size:</strong>
         <button *ngFor="let s of sizes" class="btn btn-sm m-1"
           [ngClass]="selectedSize === s ? 'btn-danger' : 'btn-outline-secondary'" (click)="selectedSize = s">
           {{s}}
         </button>
-      </div>
+      </div> -->
 
       <!-- Quantity + Buttons -->
       <div class="d-flex align-items-center gap-3 mb-3">
@@ -100,7 +100,14 @@
           <small>Free 30 Days Delivery Returns</small>
         </div>
       </div>
-
+      <!-- Delivery -->
+      <div class="delivery-box mb-2 d-flex align-items-center">
+        <i class="bi bi-cash"></i>
+        <div>
+          <h6>Cash with Delivery </h6>
+          <small>Pay Cash with easy way</small>
+        </div>
+      </div>
     </div>
   </div>
   
@@ -165,41 +172,51 @@
           </button>
         </div>
       </div>
-      <div class="m-lg-4 m-1">
-        <div class="d-flex flex-wrap justify-content-center gap-4 ">
-          <div *ngFor="let item of product.reviews" class="card col-md-5 p-3  col-10">
+         <div class="reviews-container">
 
-            <!-- ⭐ Stars -->
-            <div class="mb-2">
-              <i *ngFor="let star of [1,2,3,4,5]" class="bi"
-                [ngClass]="star <= (item?.rating ??0) ? 'bi-star-fill text-warning' : 'bi-star text-muted'">
-              </i>
-            </div>
-
-            <!-- 👤 Name + Verified -->
-            <div class="fw-bold">
-              {{ item.userName }}
-              <i class="bi bi-patch-check-fill text-success ms-1"></i>
-            </div>
-
-            <!-- 💬 Comment -->
-            <div class="text-muted my-2">
-              {{ item.comment }}
-            </div>
-
-            <!-- 📅 Date -->
-            <div class="small text-secondary">
-              {{ item.createdAt | date:'mediumDate' }}
-            </div>
-
-          </div>
+      <!-- Average Rating -->
+      <div class="average-box">
+        <div class="avg-score">
+          {{ averageRating | number:'1.1-1' }}
         </div>
-        <div class="mt-4 d-flex justify-content-center">
-          <button class="btn border-1 border px-3 rounded-pill">Load more reviews</button>
-          <button class="btn px-lg-3 p-0 rounded-pill d-md-none write-btn">Write a Review</button>
 
+        <div class="stars">
+          <i *ngFor="let star of starsArray" class="bi"
+            [ngClass]="star <= averageRating ? 'bi-star-fill filled' : 'bi-star'">
+          </i>
         </div>
+
+        <p class="total">{{ reviews.length }} Reviews</p>
       </div>
+
+      <!-- Reviews List -->
+      <div *ngFor="let review of reviews" class="review-card">
+
+        <div class="header">
+          <h5>{{ review.reviewerName }}</h5>
+          <span>{{ review.createdAt | date }}</span>
+        </div>
+
+        <p class="comment">{{ review.comment }}</p>
+
+        <div class="ratings">
+
+          <div class="rate-item" *ngFor="let item of getRatingItems(review)">
+            <span class="label">{{ item.label }}</span>
+
+            <div class="progress">
+              <div class="progress-fill" [style.width.%]="item.value * 20">
+              </div>
+            </div>
+
+            <span class="value">{{ item.value }}/5</span>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
     </div>
 
     <!-- FAQs  -->

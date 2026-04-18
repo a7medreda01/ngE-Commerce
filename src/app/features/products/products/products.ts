@@ -24,12 +24,13 @@ export class Products {
       const type = params['type'];
       const category = params['category'];
       const rating = params['rating'];
+      const pageSize = params['pageSize'];
 
-      this.loadProducts(search, min, max, type, category,rating);
+      this.loadProducts(search, min, max, type, category,rating,120);
     });
   }
-  loadProducts(search?: string, min?: number, max?: number, type?: string, category?: number,rating?:number) {
-    this.service.getProducts(search, min, max, type, category,rating).subscribe({
+  loadProducts(search?: string, min?: number, max?: number, type?: string, category?: number,rating?:number,pageSize?:number) {
+    this.service.getProducts(search, min, max, type, category,rating,pageSize).subscribe({
       next: (res) => {
         this.products = res;
       },

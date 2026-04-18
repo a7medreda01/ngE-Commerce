@@ -26,6 +26,7 @@ export class ProductDetails {
     const id = Number(params.get('id'));
     this.getProduct(id);
     this.selectedImage=''
+
   });
 
     //ratineg
@@ -42,6 +43,8 @@ getProduct(id: number) {
   this.service.getProductById(id).subscribe({
     next: (res) => {
       this.product = res;
+      this.reviews=res.reviews
+      this.calculateAverage();
           this.specsText = this.product.details
     this.specsArray = this.specsText.split('.').filter(x => x.trim() !== '');
           window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -102,4 +105,33 @@ getProduct(id: number) {
         }
       });
     }
+
+
+    //reviews 
+    reviews: any[] = [];
+averageRating: number = 0;
+starsArray = [1, 2, 3, 4, 5];
+
+calculateAverage() {
+  if (!this.reviews.length) return;
+
+  let total = 0;
+
+  this.reviews.forEach(r => {
+    const avg = (r.quality + r.design + r.usability + r.durability + r.valueForMoney) / 5;
+    total += avg;
+  });
+
+  this.averageRating = total / this.reviews.length;
+}
+
+getRatingItems(review: any) {
+  return [
+    { label: 'Quality', value: review.quality },
+    { label: 'Design', value: review.design },
+    { label: 'Usability', value: review.usability },
+    { label: 'Durability', value: review.durability },
+    { label: 'Value', value: review.valueForMoney }
+  ];
+}
 }
